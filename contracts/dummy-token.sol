@@ -20,7 +20,7 @@ contract DummyToken is ERC20 {
 
     function burn(uint256 amount) public {
         _burn(_msgSender(), amount);
-		(bool sent, bytes memory data) = _msgSender().call{value: amount / _tokenValue}("");
-		require(sent, "Failed to send Ether");
+        (bool sent, bytes memory data) = _msgSender().call{value: amount / _tokenValue}("");
+        require(sent, "Failed to send Ether");
     }
 }
