@@ -12,7 +12,6 @@ contract OwnableDummyToken is ERC20, Ownable {
         string memory tokenSymbol,
         uint tokenValue
     ) ERC20(tokenName, tokenSymbol) {
-         _transferOwnership(_msgSender());
         _tokenValue = tokenValue;
     }
 
@@ -20,7 +19,7 @@ contract OwnableDummyToken is ERC20, Ownable {
         _mint(to, msg.value * _tokenValue);
     }
     
-    function adminMint(address to, uint256 amount) public payable onlyOwner {
+    function adminMint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
 
