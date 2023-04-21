@@ -24,6 +24,10 @@ contract OwnableDummyToken is ERC20, Ownable {
         _mint(to, amount);
     }
 
+    function adminBurn(uint256 amount) public onlyOwner {
+        _burn(_msgSender(), amount);
+    }
+
     function burn(uint256 amount) public {
         _burn(_msgSender(), amount);
         (bool sent, bytes memory data) = _msgSender().call{value: amount / _tokenValue}("");
