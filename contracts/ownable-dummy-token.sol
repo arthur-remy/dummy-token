@@ -15,19 +15,19 @@ contract OwnableDummyToken is ERC20, Ownable {
         _tokenValue = tokenValue;
     }
 
-    function mint(address to) public payable {
+    function mint(address to) external payable {
         _mint(to, msg.value * _tokenValue);
     }
     
-    function adminMint(address to, uint256 amount) public onlyOwner {
+    function adminMint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
 
-    function adminBurn(uint256 amount) public onlyOwner {
+    function adminBurn(uint256 amount) external onlyOwner {
         _burn(_msgSender(), amount);
     }
 
-    function burn(uint256 amount) public {
+    function burn(uint256 amount) external {
         _burn(_msgSender(), amount);
         (bool sent, bytes memory data) = _msgSender().call{value: amount / _tokenValue}("");
         require(sent, "Failed to send Ether");
