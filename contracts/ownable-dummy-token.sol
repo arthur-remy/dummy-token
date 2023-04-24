@@ -28,6 +28,7 @@ contract OwnableDummyToken is ERC20, Ownable {
     }
 
     function burn(uint256 amount) external {
+        require(amount >= _tokenValue);
         _burn(_msgSender(), amount);
         (bool sent, bytes memory data) = _msgSender().call{value: amount / _tokenValue}("");
         require(sent, "Failed to send Ether");
